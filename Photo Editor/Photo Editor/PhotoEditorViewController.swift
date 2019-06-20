@@ -47,7 +47,7 @@ public final class PhotoEditorViewController: UIViewController {
     @objc public var colors  : [UIColor] = []
     
     @objc public var photoEditorDelegate: PhotoEditorDelegate?
-    @objc public var stickersViewControllerDelegate : StickersViewControllerDelegate?
+    @objc var stickersViewControllerDelegate : StickersViewControllerDelegate?
     var colorsCollectionViewDelegate: ColorsCollectionViewDelegate!
     
     // list of controls to be hidden
