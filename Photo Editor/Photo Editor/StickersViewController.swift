@@ -17,7 +17,6 @@ class StickersViewController: UIViewController, UIGestureRecognizerDelegate {
     var collectioView: UICollectionView!
     
     var stickers : [UIImage] = []
-    var stickersViewControllerDelegate : StickersViewControllerDelegate?
     
     let screenSize = UIScreen.main.bounds.size
     
@@ -155,7 +154,7 @@ class StickersViewController: UIViewController, UIGestureRecognizerDelegate {
         }, completion: { (finished) -> Void in
             self.view.removeFromSuperview()
             self.removeFromParentViewController()
-            self.stickersViewControllerDelegate?.stickersViewDidDisappear()
+            //            self.stickersViewControllerDelegate?.stickersViewDidDisappear()
         })
     }
     
@@ -190,7 +189,7 @@ extension StickersViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        stickersViewControllerDelegate?.didSelectImage(image: stickers[indexPath.item])
+        //        stickersViewControllerDelegate?.didSelectImage(image: stickers[indexPath.item])
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

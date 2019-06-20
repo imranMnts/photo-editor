@@ -17,7 +17,7 @@ public final class PhotoEditorViewController: UIViewController {
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     //To hold the drawings and stickers
     @IBOutlet weak var canvasImageView: UIImageView!
-
+    
     @IBOutlet weak var topToolbar: UIView!
     @IBOutlet weak var bottomToolbar: UIView!
     
@@ -47,12 +47,11 @@ public final class PhotoEditorViewController: UIViewController {
     @objc public var colors  : [UIColor] = []
     
     @objc public var photoEditorDelegate: PhotoEditorDelegate?
-    @objc var stickersViewControllerDelegate : StickersViewControllerDelegate?
     var colorsCollectionViewDelegate: ColorsCollectionViewDelegate!
     
     // list of controls to be hidden
     @objc public var hiddenControls : [NSString] = []
-
+    
     var stickersVCIsVisible = false
     var drawColor: UIColor = UIColor.red
     var textColor: UIColor = UIColor.red
@@ -69,11 +68,15 @@ public final class PhotoEditorViewController: UIViewController {
     
     
     var stickersViewController: StickersViewController!
-
+    
     //Register Custom font before we load XIB
     public override func loadView() {
         registerFont()
         super.loadView()
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
     
     override public func viewDidLoad() {
@@ -132,6 +135,54 @@ public final class PhotoEditorViewController: UIViewController {
     func hideToolbar(hide: Bool) {
         topToolbar.isHidden = hide
         bottomToolbar.isHidden = hide
+    }
+    
+    func didSelectView(view: UIView) {
+        view.center = canvasImageView.center
+        self.canvasImageView.addSubview(view)
+        //Gestures
+        addGestures(view: view)
+    }
+    
+    func didSelectImage(image: UIImage) {
+        let imageView = UIImageView(image: image)
+        imageView.contentMode = .scaleAspectFit
+        imageView.frame.size = CGSize(width: 150, height: 150)
+        imageView.center = canvasImageView.center
+        
+        self.canvasImageView.addSubview(imageView)
+        //Gestures
+        addGestures(view: imageView)
+    }
+    
+    func stickersViewDidDisappear() {
+        stickersVCIsVisible = false
+        hideToolbar(hide: false)
+    }
+    
+    func addGestures(view: UIView) {
+        //Gestures
+        view.isUserInteractionEnabled = true
+        
+        let panGesture = UIPanGestureRecognizer(target: self,
+                                                action: #selector(PhotoEditorViewController.panGesture))
+        panGesture.minimumNumberOfTouches = 1
+        panGesture.maximumNumberOfTouches = 1
+        panGesture.delegate = self
+        view.addGestureRecognizer(panGesture)
+        
+        let pinchGesture = UIPinchGestureRecognizer(target: self,
+                                                    action: #selector(PhotoEditorViewController.pinchGesture))
+        pinchGesture.delegate = self
+        view.addGestureRecognizer(pinchGesture)
+        
+        let rotationGestureRecognizer = UIRotationGestureRecognizer(target: self,
+                                                                    action:#selector(PhotoEditorViewController.rotationGesture) )
+        rotationGestureRecognizer.delegate = self
+        view.addGestureRecognizer(rotationGestureRecognizer)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(PhotoEditorViewController.tapGesture))
+        view.addGestureRecognizer(tapGesture)
     }
 }
 

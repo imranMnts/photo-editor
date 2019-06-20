@@ -11,40 +11,40 @@ import UIKit
 
 // MARK: - Control
 public enum control: String {
-    case crop
-    case sticker
-    case draw
+    case circle
+    case square
+    case arrow
     case text
     case save
     case share
     case clear
-
+    
     public func string() -> String {
         return self.rawValue
     }
 }
 
 extension PhotoEditorViewController {
-
-     //MARK: Top Toolbar
+    
+    //MARK: Top Toolbar
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
         photoEditorDelegate?.canceledEditing()
         self.dismiss(animated: true, completion: nil)
     }
-
+    
     @IBAction func circleButtonTapped(_ sender: UIButton) {
-        stickersViewControllerDelegate?.didSelectImage(image: UIImage(named: "circle")!)
+        self.didSelectImage(image: UIImage(named: "circle")!)
     }
-
+    
     @IBAction func squareButtonTapped(_ sender: Any) {
-        stickersViewControllerDelegate?.didSelectImage(image: UIImage(named: "square")!)
+        self.didSelectImage(image: UIImage(named: "square")!)
     }
-
+    
     @IBAction func arrowButtonTapped(_ sender: Any) {
-        stickersViewControllerDelegate?.didSelectImage(image: UIImage(named: "arrow")!)
+        self.didSelectImage(image: UIImage(named: "arrow")!)
     }
-
+    
     @IBAction func textButtonTapped(_ sender: Any) {
         isTyping = true
         let textView = UITextView(frame: CGRect(x: 0, y: canvasImageView.center.y,
@@ -64,7 +64,7 @@ extension PhotoEditorViewController {
         self.canvasImageView.addSubview(textView)
         addGestures(view: textView)
         textView.becomeFirstResponder()
-    }    
+    }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
         view.endEditing(true)
@@ -86,7 +86,7 @@ extension PhotoEditorViewController {
         if let popoverController = activity.popoverPresentationController {
             popoverController.barButtonItem = UIBarButtonItem(customView: sender)
         }
-
+        
         present(activity, animated: true, completion: nil)
         
     }
@@ -105,7 +105,7 @@ extension PhotoEditorViewController {
         photoEditorDelegate?.doneEditing(image: image)
         self.dismiss(animated: true, completion: nil)
     }
-
+    
     //MAKR: helper methods
     
     @objc func image(_ image: UIImage, withPotentialError error: NSErrorPointer, contextInfo: UnsafeRawPointer) {

@@ -23,7 +23,7 @@ extension PhotoEditorViewController {
             if let touch = touches.first {
                 let location = touch.location(in: self.view)
                 if !stickersViewController.view.frame.contains(location) {
-                    removeStickersView()
+//                    removeStickersView()
                 }
             }
         }
