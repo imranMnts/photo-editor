@@ -33,24 +33,16 @@ extension PhotoEditorViewController {
         self.dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func cropButtonTapped(_ sender: UIButton) {
-        let controller = CropViewController()
-        controller.delegate = self
-        controller.image = image
-        let navController = UINavigationController(rootViewController: controller)
-        present(navController, animated: true, completion: nil)
+    @IBAction func circleButtonTapped(_ sender: UIButton) {
+        stickersViewControllerDelegate?.didSelectImage(image: UIImage(named: "circle")!)
     }
 
-    @IBAction func stickersButtonTapped(_ sender: Any) {
-        addStickersViewController()
+    @IBAction func squareButtonTapped(_ sender: Any) {
+        stickersViewControllerDelegate?.didSelectImage(image: UIImage(named: "square")!)
     }
 
-    @IBAction func drawButtonTapped(_ sender: Any) {
-        isDrawing = true
-        canvasImageView.isUserInteractionEnabled = false
-        doneButton.isHidden = false
-        colorPickerView.isHidden = false
-        hideToolbar(hide: true)
+    @IBAction func arrowButtonTapped(_ sender: Any) {
+        stickersViewControllerDelegate?.didSelectImage(image: UIImage(named: "arrow")!)
     }
 
     @IBAction func textButtonTapped(_ sender: Any) {
@@ -128,16 +120,16 @@ extension PhotoEditorViewController {
         for control in controls {
             if (control == "clear") {
                 clearButton.isHidden = true
-            } else if (control == "crop") {
-                cropButton.isHidden = true
-            } else if (control == "draw") {
-                drawButton.isHidden = true
+            } else if (control == "circle") {
+                circleButton.isHidden = true
+            } else if (control == "arrow") {
+                arrowButton.isHidden = true
             } else if (control == "save") {
                 saveButton.isHidden = true
             } else if (control == "share") {
                 shareButton.isHidden = true
-            } else if (control == "sticker") {
-                stickerButton.isHidden = true
+            } else if (control == "square") {
+                squareButton.isHidden = true
             } else if (control == "text") {
                 textButton.isHidden = true
             }

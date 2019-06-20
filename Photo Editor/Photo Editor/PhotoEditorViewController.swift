@@ -28,9 +28,9 @@ public final class PhotoEditorViewController: UIViewController {
     @IBOutlet weak var colorPickerViewBottomConstraint: NSLayoutConstraint!
     
     //Controls
-    @IBOutlet weak var cropButton: UIButton!
-    @IBOutlet weak var stickerButton: UIButton!
-    @IBOutlet weak var drawButton: UIButton!
+    @IBOutlet weak var circleButton: UIButton!
+    @IBOutlet weak var squareButton: UIButton!
+    @IBOutlet weak var arrowButton: UIButton!
     @IBOutlet weak var textButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
@@ -47,6 +47,7 @@ public final class PhotoEditorViewController: UIViewController {
     @objc public var colors  : [UIColor] = []
     
     @objc public var photoEditorDelegate: PhotoEditorDelegate?
+    @objc public var stickersViewControllerDelegate : StickersViewControllerDelegate?
     var colorsCollectionViewDelegate: ColorsCollectionViewDelegate!
     
     // list of controls to be hidden
