@@ -75,10 +75,6 @@ public final class PhotoEditorViewController: UIViewController {
         super.loadView()
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
     override public func viewDidLoad() {
         super.viewDidLoad()
         self.setImageView(image: image!)
